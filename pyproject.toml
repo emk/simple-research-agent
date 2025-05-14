@@ -21,7 +21,7 @@ dependencies = [
 research = "simple_research.__main__:main"
 
 [dependency-groups]
-dev = ["pytest>=8.3.5", "ruff>=0.11.9", "ty>=0.0.0a8"]
+dev = ["poethepoet>=0.34.0", "pytest>=8.3.5", "ruff>=0.11.9", "ty>=0.0.0a8"]
 
 [build-system]
 # Configure a build system to keep `uv run` happy.
@@ -34,3 +34,9 @@ packages = ["simple_research"]
 
 [tool.ruff]
 line-length = 88
+
+[tool.poe.tasks]
+test = "pytest"
+format = "ruff format"
+typecheck = "ty check"
+check = ["format", "typecheck", "test"]
