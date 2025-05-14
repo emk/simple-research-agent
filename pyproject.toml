@@ -1,0 +1,36 @@
+[project]
+name = "llm-research-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp-google-cse>=0.1.4",
+    "mcp-server-calculator>=0.2.0",
+    "mcp-server-fetch>=2025.4.7",
+    "mcp[cli]>=1.8.0",
+    "openai>=1.78.0",
+    "prompt-toolkit>=3.0.51",
+    "pydantic>=2.11.4",
+    "python-dotenv>=1.1.0",
+    "rich>=14.0.0",
+]
+
+[project.scripts]
+# Run our main.py script.
+research = "simple_research.__main__:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3.5", "ruff>=0.11.9", "ty>=0.0.0a8"]
+
+[build-system]
+# Configure a build system to keep `uv run` happy.
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Files to include in the wheel.
+packages = ["simple_research"]
+
+[tool.ruff]
+line-length = 88
