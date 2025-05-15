@@ -21,7 +21,14 @@ dependencies = [
 research = "simple_research.__main__:main"
 
 [dependency-groups]
-dev = ["poethepoet>=0.34.0", "pytest>=8.3.5", "ruff>=0.11.9", "ty>=0.0.0a8"]
+dev = [
+    "flaky>=3.8.1",
+    "poethepoet>=0.34.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "ruff>=0.11.9",
+    "ty>=0.0.0a8",
+]
 
 [build-system]
 # Configure a build system to keep `uv run` happy.
@@ -32,11 +39,14 @@ build-backend = "hatchling.build"
 # Files to include in the wheel.
 packages = ["simple_research"]
 
-[tool.ruff]
-line-length = 88
-
 [tool.poe.tasks]
 test = "pytest"
 format = "ruff format"
 typecheck = "ty check"
 check = ["format", "typecheck", "test"]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "session"
+
+[tool.ruff]
+line-length = 88

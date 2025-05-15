@@ -152,7 +152,7 @@ class McpManager:
         for tool in client.list_tools():
             self.tool_map[tool.name] = client
 
-    async def get_tools(self) -> List[Tool]:
+    def get_tools(self) -> List[Tool]:
         """Returns the list of tools available on all clients."""
         tools = []
         for client in self.clients:

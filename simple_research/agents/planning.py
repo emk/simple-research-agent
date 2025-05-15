@@ -19,9 +19,24 @@ class PlanningAgent(Agent):
     ) -> Optional[AgentType]:
         """Run the planning agent."""
 
+        if memory.contains_data():
+            notebook = f"""
+Your research notebook currently contains the following.
+
+{str(memory)}
+"""
+        else:
+            notebook = """
+Your research notebook is currently empty.
+"""
+
         # Build our instructions.
-        full_question = f"""You are a research coordinator! Your job is to manage
-a number of research agents who can perform different tasks. 
+        full_question = f"""You are a research coordinator!
+{notebook}
+## Your job
+
+As a research coordinator, your job is to manage a number of research agents who
+can perform different tasks. 
 
 These agents are:
 
@@ -30,14 +45,16 @@ These agents are:
 2. "Output", who can output information to the user.
 
 You use your knowledge to examine the user's question, and to ask agents to
-perform their assigned tasks. You should normally start by thinking of a web query
-that might answer the user's question, and delegating it to the "Search" agent.
-The search agent will return a list of URLs that might be relevant to the user's
-question. You can then ask the "Fetch" agent to fetch any URL that seems
-relevant, and it will summarize the content of the page for you.
+perform their assigned tasks. If your research notebook is empty, you should
+normally start by thinking of a web query that might answer the user's question,
+and delegating it to the "Search" agent. The search agent will return a list of
+URLs that might be relevant to the user's question. You can then ask the "Fetch"
+agent to fetch any URL that seems relevant, and it will summarize the content of
+the page for you. If you need more information, you can ask "Fetch" or "Search"
+to help you find more.
 
-Once you have collected (and confimed!) enough information, you can delegate to
-the output agent to summarize your findings.
+Once you have collected (and confimed!) enough information to confidently answer
+the question, you can delegate to the output agent to summarize your findings.
 
 The user has asked the following question:
 

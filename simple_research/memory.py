@@ -34,6 +34,14 @@ class Memory:
         self.search_results = []
         self.fetch_results = []
 
+    def contains_data(self) -> bool:
+        """Return True if we have any data in memory."""
+        return (
+            len(self.search_query_history) > 0
+            or len(self.search_results) > 0
+            or len(self.fetch_results) > 0
+        )
+
     def current_search_query(self) -> str | None:
         """Return the current search query, if any."""
         if len(self.search_query_history) > 0:
@@ -65,7 +73,7 @@ class Memory:
         # Fetch results.
         relevant = [result for result in self.fetch_results if result.is_relevant()]
         if len(relevant) > 0:
-            wtr.write("## Pages you have fetched\n")
+            wtr.write("## Pages you have already fetched (summarized)\n")
             for result in relevant:
                 wtr.write(f"{result}\n")
 
@@ -118,7 +126,7 @@ class FetchResult(BaseModel):
     def __str_(self) -> str:
         """Return a string representation of the fetch result."""
 
-        return f"""### Fetched page: {self.url}
+        return f"""### Already fetched page: {self.url}
 
 {self.fetch_result}
 
@@ -138,7 +146,7 @@ class RelevantInformation(BaseModel):
 
     def __str__(self) -> str:
         """Return a string representation of the relevant information."""
-        return ">" + re.sub("\n", "> ", self.summary).strip()
+        return "> " + re.sub("\n", "> ", self.summary).strip()
 
 
 class IrrevelevantInformation(BaseModel):
