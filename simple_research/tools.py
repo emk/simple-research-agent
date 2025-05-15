@@ -131,10 +131,14 @@ class McpManager:
     tool_map: dict[str, McpClient]
     """The map of tool names to clients."""
 
+    mocks: dict[str, str]
+    """A map from tool names to mock results. Used for testing."""
+
     def __init__(self) -> None:
         """Initializes the manager with no MCP servers."""
         self.clients = []
         self.tool_map = {}
+        self.mocks = {}
 
     @classmethod
     async def from_config(cls) -> McpManager:
@@ -151,6 +155,10 @@ class McpManager:
         self.clients.append(client)
         for tool in client.list_tools():
             self.tool_map[tool.name] = client
+
+    def add_mock(self, tool_name: str, result: str) -> None:
+        """Adds a mock result for the given tool."""
+        self.mocks[tool_name] = result
 
     def get_tools(self) -> List[Tool]:
         """Returns the list of tools available on all clients."""
@@ -179,6 +187,11 @@ class McpManager:
 
     async def call_tool(self, tool_name: str, arguments: dict) -> str:
         """Calls the given tool with the given arguments."""
+        # Check for a mock.
+        if tool_name in self.mocks:
+            return self.mocks[tool_name]
+
+        # Otherwise, find the client and call the tool.
         client = self.tool_map[tool_name]
         return await client.call_tool(tool_name, arguments=arguments)
 

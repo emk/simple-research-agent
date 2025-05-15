@@ -33,6 +33,8 @@ class FetchAgent(Agent):
         full_question = f"""You are part of a research team! Your job is to
 examine web pages and summarize any relevant content.
 
+Here is the web page URL you fetched: {url}
+
 Here is the content of the web page:
 
 === BEGIN WEB PAGE ===
@@ -66,4 +68,5 @@ one of three types of results:
         memory.fetch_results.append(output.response)
         memory.current_fetch_url = None
 
+        # Always return to the planning agent.
         return AgentType.PLANNING

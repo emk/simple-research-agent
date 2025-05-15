@@ -78,9 +78,8 @@ seem unlikely to be relevant, or which are likely to be videos.
         for result in output.response.results:
             memory.search_results.append(result)
 
-        # For now, stop after searching.
-        # return AgentType.PLANNING
-        return None
+        # Always return to the planning agent.
+        return AgentType.PLANNING
 
 
 class SearchResults(BaseModel):

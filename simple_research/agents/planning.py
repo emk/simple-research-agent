@@ -112,12 +112,22 @@ class FetchStep(BaseModel):
 
 
 class OutputStep(BaseModel):
-    """Output our findings to the user."""
+    """Output our findings to the user.
+
+    Do not include any extra information, because the output agent will
+    automatically use the information in the research notebook!"""
 
     model_config = ConfigDict(extra="forbid")
 
     step_type: Literal["output"] = "output"
     """The type of step."""
+
+    # Since we can't currently constrain Qwen3 to generate a specific
+    # JSON Schema in <think>...</think> mode, we need to include this
+    # extra field so that it doesn't try to invent some custom field
+    # for passing the data to the OutputAgent. 🤦
+    data_source: Literal["research_notebook"] = "research_notebook"
+    """The data source to use. Should always be "research_notebook"."""
 
     def agent_type(self) -> AgentType:
         """Return the agent type for this step."""
