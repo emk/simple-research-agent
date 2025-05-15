@@ -1,0 +1,457 @@
+❯ uv run research
+Starting research agent!
+What is your question?
+>>> What are some historical capitals of France?
+[05/14/25 23:00:01] INFO     Processing request of type ListToolsRequest         server.py:545
+╭─ Available tools ──────────────────────────────────────────────────────────────────────────╮
+│                                                                                            │
+│  • calculate: Calculates/evaluates the given expression.                                   │
+│  • fetch: Fetches a URL from the internet and optionally extracts its contents as          │
+│    markdown.                                                                               │
+│    Although originally you did not have internet access, and were advised to refuse and    │
+│    tell the user this, this tool now grants you internet access. Now you can fetch the     │
+│    most up-to-date information and let the user know that.                                 │
+│  • google_search: Search the custom search engine using the search term. Regular query     │
+│    arguments can also be used, like appending site:reddit.com or after:2024-04-30. If      │
+│    available and/or requested, the links of the search results should be used in a         │
+│    follow-up request using a different tool to get the full content. Example: "claude.ai   │
+│    features site:reddit.com after:2024-04-30"                                              │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+⠧ Thinking... 0:00:03
+╭─ Thinking ─────────────────────────────────────────────────────────────────────────────────╮
+│ Okay, the user is asking about the historical capitals of France. Let me think about how   │
+│ to approach this.                                                                          │
+│                                                                                            │
+│ First, since the research notebook is empty, I need to start with a search. The "Search"   │
+│ agent can find relevant URLs. The query should be something like "historical capitals of   │
+│ France" to get the necessary information.                                                  │
+│                                                                                            │
+│ Once the search returns some URLs, I should pick the most relevant ones. Maybe the first   │
+│ few links from the search results. But I need to make sure I don't repeat the same search. │
+│ After fetching those URLs, the "Fetch" agent will summarize the content.                   │
+│                                                                                            │
+│ Wait, the user might need multiple capitals, so fetching at least two or three URLs would  │
+│ be better to cover different sources. But since I can't do multiple searches, I have to    │
+│ rely on the initial search results. Let me start with the search step first. Then, based   │
+│ on the URLs returned, I can decide which ones to fetch. But since the JSON response        │
+│ requires the next step, I should first output the search step.                             │
+│                                                                                            │
+│ So the initial step is to run the search. Then, once the URLs are obtained, the next steps │
+│ would be to fetch those links. But according to the instructions, I need to generate the   │
+│ first step. Therefore, the first action is to use the Search agent with the query          │
+│ "historical capitals of France".                                                           │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+PlanningResult(
+    next_step=SearchStep(step_type='search', query='historical capitals of France')
+)
+╭─ Search results ───────────────────────────────────────────────────────────────────────────╮
+│ Title: List of capitals of France - Wikipedia Link:                                        │
+│ https://en.wikipedia.org/wiki/List_of_capitals_of_France Snippet: Chronology · Bordeaux    │
+│ (September 1914), the government was relocated from Paris to Bordeaux very briefly during  │
+│ World War I, when it was feared that Paris would ...                                       │
+│                                                                                            │
+│ Title: What happened to France's other capitals? Link:                                     │
+│ https://www.thefrenchhistorypodcast.com/what-happened-to-frances-other-capitals/ Snippet:  │
+│ Apr 1, 2023 ... An episode covering the history of all the capitals of France; it wasn't   │
+│ just Paris!                                                                                │
+│                                                                                            │
+│ Title: Capital of France - Simple English Wikipedia, the free encyclopedia Link:           │
+│ https://simple.wikipedia.org/wiki/Capital_of_France Snippet: The capital of France is      │
+│ Paris. ... In the course of history, the national capital has been in many locations other │
+│ than Paris. History. change. List of capitals ...                                          │
+│                                                                                            │
+│ Title: France | History, Maps, Flag, Population, Cities, Capital, & Facts ... Link:        │
+│ https://www.britannica.com/place/France Snippet: Bounded by the Atlantic Ocean and the     │
+│ Mediterranean Sea, the Alps and the Pyrenees, France has long provided a geographic,       │
+│ economic, and linguistic bridge ...                                                        │
+│                                                                                            │
+│ Title: Beaune, France, Burgundy's Wine Capital, is Rich with Ancient History Link:         │
+│ https://theroadstraveled.com/beaune-history/ Snippet: Nov 16, 2022 ... Built in stages     │
+│ between the 12th and 17th centuries, the ramparts are largely intact. What still exists is │
+│ surprisingly well preserved. Even now ...                                                  │
+│                                                                                            │
+│ Title: Other Potential French Capitals? | alternatehistory.com Link:                       │
+│ https://www.alternatehistory.com/forum/threads/other-potential-french-capitals.495249/     │
+│ Snippet: Aug 24, 2020 ... For the sake of narrowing thing's down, let's say the French     │
+│ Revolutionary wars are so destructive on Paris that the post-war government is ...         │
+│                                                                                            │
+│ Title: Paris facts: the capital of France in history Link:                                 │
+│ https://home.adelphi.edu/~ca19535/page%204.html Snippet: Paris is the capital of France,   │
+│ the largest country of Europe with 550 000 km2 (65 millions inhabitants). Paris has 2.234  │
+│ million inhabitants end 2011.                                                              │
+│                                                                                            │
+│ Title: French Legation | Texas Historical Commission Link:                                 │
+│ https://thc.texas.gov/historic-sites/french-legation Snippet: French Legation State        │
+│ Historic Site ... The site tells the story of Texas' settlement and the growth of one of   │
+│ the capital city's most vibrant neighborhoods.                                             │
+│                                                                                            │
+│                                                                                            │
+│ Title: Me: What is the capital of France? Qwen3-30b-a3b:  Okay, so ... Link:               │
+│ https://www.linkedin.com/posts/sanand0_me-what-is-the-capital-of-france-qwen3-activity-732 │
+│ 4655268640829444-Qm1Q Snippet: May 3, 2025 ... ... French cities? There's Lyon, Marseille, │
+│ Bordeaux... But those are major cities too, but not capitals. Wait, maybe there was some   │
+│ historical ...                                                                             │
+│                                                                                            │
+│ Title: 80 Years Ago This Town Was The Capital of France For One Day ... Link:              │
+│ https://www.deepheartoffrance.com/historic-newspapers-clermont-ferrand-capital-of-france-2 │
+│ / Snippet: Jun 19, 2020 ... ... capital city of France. The last days of the French        │
+│ Republic. Clermont-Ferrand WWII France History War Auvergne Petain June 20, 1940: "Let's   │
+│ ...                                                                                        │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+⠦ Thinking... 0:00:06
+╭─ Thinking ─────────────────────────────────────────────────────────────────────────────────╮
+│ Okay, let's tackle this. The user is asking for historical capitals of France. So I need   │
+│ to look through the search results and pick the ones that specifically mention historical  │
+│ capitals.                                                                                  │
+│                                                                                            │
+│ First, the Wikipedia page "List of capitals of France" seems directly relevant. The        │
+│ snippet mentions Bordeaux being a temporary capital during WWI. That's a historical        │
+│ capital. Then there's the podcast episode titled "What happened to France's other          │
+│ capitals?" which sounds like it covers the history of other capitals. The Simple English   │
+│ Wikipedia entry also mentions that the capital has been in many places besides Paris, so   │
+│ that's useful.                                                                             │
+│                                                                                            │
+│ The Britannica entry is a general overview of France, so maybe not specific enough. The    │
+│ article about Beaune talks about its history but not about being a capital. The alternate  │
+│ history forum post discusses hypothetical capitals, which might not be actual historical   │
+│ ones. The Paris facts page states Paris is the capital but mentions other locations in     │
+│ history, so that's relevant. The French Legation in Texas isn't related. The LinkedIn post │
+│ mentions possible historical capitals, but it's a user's question, not a source. The       │
+│ article about Clermont-Ferrand being the capital for a day during WWII is definitely       │
+│ relevant.                                                                                  │
+│                                                                                            │
+│ So I'll include the Wikipedia list, the podcast, the Simple Wikipedia, the Paris facts     │
+│ page, and the Clermont-Ferrand article. Exclude the others that don't focus on historical  │
+│ capitals.                                                                                  │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+SearchResults(
+    results=[
+        SearchResult(
+            title='List of capitals of France - Wikipedia',
+            url='https://en.wikipedia.org/wiki/List_of_capitals_of_France',
+            snippet='Chronology · Bordeaux (September 1914), the government was relocated from
+Paris to Bordeaux very briefly during World War I, when it was feared that Paris would ...'
+        ),
+        SearchResult(
+            title="What happened to France's other capitals?",
+            url='https://www.thefrenchhistorypodcast.com/what-happened-to-frances-other-capita
+ls/',
+            snippet="Apr 1, 2023 ... An episode covering the history of all the capitals of 
+France; it wasn't just Paris!"
+        ),
+        SearchResult(
+            title='Capital of France - Simple English Wikipedia, the free encyclopedia',
+            url='https://simple.wikipedia.org/wiki/Capital_of_France',
+            snippet='The capital of France is Paris. ... In the course of history, the 
+national capital has been in many locations other than Paris. History. change. List of 
+capitals ...'
+        ),
+        SearchResult(
+            title='Paris facts: the capital of France in history',
+            url='https://home.adelphi.edu/~ca19535/page%204.html',
+            snippet='Paris is the capital of France, the largest country of Europe with 550 
+000 km2 (65 millions inhabitants). Paris has 2.234 million inhabitants end 2011.'
+        ),
+        SearchResult(
+            title='80 Years Ago This Town Was The Capital of France For One Day ...',
+            url='https://www.deepheartoffrance.com/historic-newspapers-clermont-ferrand-capita
+l-of-france-2/',
+            snippet='Jun 19, 2020 ... ... capital city of France. The last days of the French 
+Republic. Clermont-Ferrand WWII France History War Auvergne Petain June 20, 1940: "Let\'s ...'
+        )
+    ]
+)
+⠇ Thinking... 0:00:09
+╭─ Thinking ─────────────────────────────────────────────────────────────────────────────────╮
+│ Okay, so the user is asking about the historical capitals of France. Let me think about    │
+│ how to approach this. The research coordinator needs to use the agents provided. First, I  │
+│ should check if there's existing information in the research notebook. The user mentioned  │
+│ that the notebook currently has the original question, search queries tried, and search    │
+│ results. But the search queries tried was just "historical capitals of France", and the    │
+│ results include some URLs.                                                                 │
+│                                                                                            │
+│ But according to the instructions, if the research notebook is empty, start with a search. │
+│ However, in this case, the notebook isn't empty. But maybe the search results are not      │
+│ sufficient. The user's question is asking for some historical capitals, so I need to make  │
+│ sure I have enough information. The search results include a Wikipedia page, a podcast     │
+│ episode, and some other links. But maybe I need to fetch more specific information.        │
+│                                                                                            │
+│ The user's question is straightforward, but to be thorough, I should fetch the URLs that   │
+│ seem most relevant. The first step is to check if the existing search results are enough.  │
+│ However, the user's notebook has the search results, but the research coordinator needs to │
+│ decide if more information is needed. The instructions say to fetch at least one URL, and  │
+│ maybe more for complex info.                                                               │
+│                                                                                            │
+│ Looking at the search results, the Wikipedia page "List of capitals of France" seems very  │
+│ relevant. The snippet mentions Bordeaux being a temporary capital during World War I.      │
+│ Another result is from a podcast episode that covers the history of all capitals. The      │
+│ "Capital of France" page on Simple Wikipedia also mentions that the capital was in many    │
+│ locations besides Paris. The other links mention Clermont-Ferrand being the capital for a  │
+│ day in 1940.                                                                               │
+│                                                                                            │
+│ So, I should fetch the Wikipedia page                                                      │
+│ (https://en.wikipedia.org/wiki/List_of_capitals_of_France) and maybe the podcast article   │
+│ (https://www.thefrenchhistorypodcast.com/what-happened-to-frances-other-capitals/) to get  │
+│ more details. Also, the "80 Years Ago This Town Was The Capital of France For One Day"     │
+│ article might have specific examples like Clermont-Ferrand.                                │
+│                                                                                            │
+│ But according to the rules, I shouldn't repeat a search query. Since the user already did  │
+│ a search for "historical capitals of France", the next step is to fetch the relevant URLs. │
+│ The research coordinator needs to fetch at least one URL. But to cover the necessary info, │
+│ maybe fetch two or three.                                                                  │
+│                                                                                            │
+│ So, first, fetch the Wikipedia page. Then, maybe the podcast article. Then, the article    │
+│ about Clermont-Ferrand. But the user's question is asking for a list, so the Wikipedia     │
+│ page would have the main list. The other articles might provide additional context.        │
+│                                                                                            │
+│ But the user's instruction says that the research notebook already has the search results. │
+│ So perhaps the next step is to fetch the URLs from the search results. The assistant       │
+│ should create a plan that includes fetching those URLs.                                    │
+│                                                                                            │
+│ The JSON output should be a planning result with the next step. Since the user hasn't      │
+│ fetched any URLs yet, the first step would be to fetch one of the URLs. Let's start with   │
+│ the Wikipedia page. Then, after that, maybe fetch another one. But according to the        │
+│ schema, each step is a single action. So the first step would be a FetchStep for the       │
+│ Wikipedia URL. Then, the next step would be another FetchStep for another URL, and then    │
+│ OutputStep. But the user's question requires a JSON response for the next step.            │
+│                                                                                            │
+│ So the initial step is to fetch the first URL. The answer should be a JSON object with the │
+│ next_step as a FetchStep for the first URL. Then, after that, the next step would be       │
+│ another fetch, and so on. But since the user is asking for the initial plan, the first     │
+│ action is to fetch the most relevant URL.                                                  │
+│                                                                                            │
+│ So, the first step is to fetch the Wikipedia page. Then, after that, perhaps fetch the     │
+│ podcast article. But the user's question is "What are some historical capitals of France?" │
+│ so the answer would need to list them. The Wikipedia page would have the list, but maybe   │
+│ the podcast article provides more context.                                                 │
+│                                                                                            │
+│ Alternatively, maybe the research coordinator should first perform a search, but the user  │
+│ already did that. The search results are already in the notebook. So the next step is to   │
+│ fetch the URLs from the search results.                                                    │
+│                                                                                            │
+│ Therefore, the first step is to fetch the first URL from the search results. The URL is    │
+│ "https://en.wikipedia.org/wiki/List_of_capitals_of_France". The next_step in the JSON      │
+│ would be a FetchStep with that URL. Then, after fetching that, the next step would be to   │
+│ fetch another URL, and then output the findings. But the current step is to generate the   │
+│ first step. So the answer should be the first FetchStep.                                   │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+PlanningResult(
+    next_step=FetchStep(
+        step_type='fetch',
+        url='https://en.wikipedia.org/wiki/List_of_capitals_of_France'
+    )
+)
+╭─ Web page ─────────────────────────────────────────────────────────────────────────────────╮
+│ Contents of https://en.wikipedia.org/wiki/List_of_capitals_of_France: From Wikipedia, the  │
+│ free encyclopedia                                                                          │
+│                                                                                            │
+│ This is a chronological list of capitals of France. The capital of France has been Paris   │
+│ since its liberation in 1944.[1]                                                           │
+│                                                                                            │
+│  • Tournai (before 486), current-day Belgium                                               │
+│  • Soissons (486–936)                                                                      │
+│  • Laon (936–987)                                                                          │
+│  • Paris (987–1419), the residence of the Kings of France, although they were consecrated  │
+│    at Reims.                                                                               │
+│  • Orléans (1108), one of the few consecrations of a French monarch to occur outside of    │
+│    Reims occurred at Orléans, when Louis VI the Fat was consecrated in Orléans Cathedral   │
+│    by Daimbert, Archbishop of Sens; from 13 December 1560 to 31 January 1561, the French   │
+│    States-General also met in the city.                                                    │
+│  • Troyes (1419–1422), for a short time during the Hundred Years' War, the city was the    │
+│    seat of the royal government.                                                           │
+│  • Bourges (1422–1444), Charles VII was forced to flee from Paris.                         │
+│  • Tours (1444–1527), Louis XI made the Château de Plessis-lez-Tours his residence.        │
+│  • Paris (1528–1589), Francis I had established his court in Paris.                        │
+│  • Tours (1589–1594), faction of parliamentarians, faithful to King Henry IV sat at Tours. │
+│  • Paris (1594–1682)[citation needed]                                                      │
+│  • Versailles (1682–1789), from 1682 to 1715, Louis XIV made Versailles his residence and  │
+│    the seat of the French court.                                                           │
+│  • Paris (1789–1871), on 5 and 6 October 1789, a throng from Paris invaded the castle and  │
+│    forced the royal family to move back to Paris. The National Constituent Assembly        │
+│    followed the King to Paris soon afterward; Versailles lost its role of capital city.    │
+│                                                                                            │
+│ Provisional seats of the government:                                                       │
+│                                                                                            │
+│  • Versailles (1871), the French Third Republic established Versailles as its provisional  │
+│    seat of government in March 1871 after the Paris Commune took control of Paris.         │
+│  • Bordeaux (September 1914), the government was relocated from Paris to Bordeaux very     │
+│    briefly during World War I, when it was feared that Paris would soon fall into German   │
+│    hands. These fears were alleviated after the German Army was pushed back at the First   │
+│    Battle of the Marne.                                                                    │
+│  • Tours (10–13 June 1940), the city served as the temporary capital of France during      │
+│    World War II after the government fled Paris due to the German advance.                 │
+│  • Bordeaux (June 1940), the government was relocated from Paris to Tours then Bordeaux    │
+│    very briefly during World War II, when it became apparent that Paris would soon fall    │
+│    into German hands.                                                                      │
+│  • Clermont-Ferrand (29 June 1940), the government was relocated from Bordeaux to          │
+│    Clermont-Ferrand, during a single day, before going to Vichy, which had a larger hotel  │
+│    capacity.                                                                               │
+│  • Vichy (1940–1944), the Third Republic was abolished in Vichy and replaced it with the   │
+│    French State.                                                                           │
+│  • Brazzaville (1940–1943), with metropolitan France under Axis powers rule, Brazzaville   │
+│    was announced as the seat of the Free France government.                                │
+│  • Algiers (1943–1944), the city was made the seat of Free France, to be closer to the war │
+│    in Europe.                                                                              │
+│  • Paris (1945-present day).                                                               │
+│                                                                                            │
+│  1 ^ (in French) "Le retour à la République", www.cheminsdememoire.gouv.fr.                │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+⠇ Thinking... 0:00:06
+╭─ Thinking ─────────────────────────────────────────────────────────────────────────────────╮
+│ Okay, let's start by looking at the user's question and the provided web page content. The │
+│ user asked, "What are some historical capitals of France?" and the research coordinator    │
+│ was searching for "historical capitals of France." The web page in question is a Wikipedia │
+│ entry titled "List of capitals of France."                                                 │
+│                                                                                            │
+│ First, I need to determine if the content is relevant. The page's description mentions     │
+│ it's a chronological list of capitals of France, starting from ancient times up to the     │
+│ present. The content includes various cities that served as capitals at different periods, │
+│ such as Tournai, Soissons, Laon, Paris, Orléans, Troyes, Bourges, Tours, Versailles, and   │
+│ others. It also mentions provisional seats during specific historical events like the      │
+│ French Revolution, World Wars, etc.                                                        │
+│                                                                                            │
+│ The user is asking for historical capitals, so the list provided on the page is directly   │
+│ relevant. The page details each city's period of being the capital, along with some        │
+│ historical context, like during the Hundred Years' War or World Wars. The mention of Paris │
+│ as the capital since 1944 is also a key point. The page includes citations and references, │
+│ which adds credibility.                                                                    │
+│                                                                                            │
+│ There's no indication of an error in fetching the page, as the content is provided. The    │
+│ information is relevant because it answers the user's query by listing historical capitals │
+│ with specific time frames and events. Therefore, the correct classification is 'relevant'. │
+│ The summary should include the key cities, their periods, and notable events, citing the   │
+│ Wikipedia source.                                                                          │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+FetchResult(
+    url='https://en.wikipedia.org/wiki/List_of_capitals_of_France',
+    fetch_result=RelevantInformation(
+        result_type='relevant',
+        summary="The web page provides a chronological list of historical capitals of France. 
+Key points include: Paris as the capital since 1944, with previous capitals like Tournai 
+(before 486), Soissons (486–936), Laon (936–987), and Paris (987–1419). Other notable capitals
+include Orléans (1108), Troyes (1419–1422), Bourges (1422–1444), Tours (1444–1527), and 
+Versailles (1682–1789). The page also details provisional capitals during crises, such as 
+Bordeaux (1914), Tours (1940), Vichy (1940–1944), and Brazzaville (1940–1943). The information
+is sourced from Wikipedia's entry on the topic."
+    )
+)
+⠼ Thinking... 0:00:03
+╭─ Thinking ─────────────────────────────────────────────────────────────────────────────────╮
+│ Okay, let's tackle this. The user is asking for historical capitals of France. The         │
+│ research coordinator needs to figure out the steps.                                        │
+│                                                                                            │
+│ First, the user's question is straightforward, but the assistant already has a fetched     │
+│ page from Wikipedia that lists the capitals. The existing data includes Paris, Tournai,    │
+│ Soissons, Laon, and others. But maybe there's more info needed. However, the user might    │
+│ just need the list, and the fetched page seems comprehensive.                              │
+│                                                                                            │
+│ Wait, the instructions say that if the research notebook is not empty, maybe we don't need │
+│ to search again. But the current fetched page is from the Wikipedia list. The other search │
+│ results include a podcast episode, a Simple Wikipedia page, and some articles about        │
+│ Clermont-Ferrand. But the user's question is about "some" historical capitals, so the      │
+│ initial fetch might be enough. However, the assistant should check if more info is needed. │
+│ But since the user's question is general, maybe the initial fetch is sufficient. The       │
+│ assistant should output the findings from the fetched page. So the next step would be to   │
+│ output the data from the research notebook. But the user's instruction says to use the     │
+│ Output agent. So the correct step is to call OutputStep with data_source as                │
+│ research_notebook. But I need to make sure that the assistant has enough info. Since the   │
+│ fetched page already has the list, the answer can be generated. So the next step is        │
+│ Output.                                                                                    │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+PlanningResult(next_step=OutputStep(step_type='output', data_source='research_notebook'))
+╭─ Research notebook ────────────────────────────────────────────────────────────────────────╮
+│                                                                                            │
+│                                   Original user question                                   │
+│                                                                                            │
+│ ▌ What are some historical capitals of France?                                             │
+│                                                                                            │
+│                                                                                            │
+│                               Search queries you have tried                                │
+│                                                                                            │
+│  • historical capitals of France                                                           │
+│                                                                                            │
+│                                                                                            │
+│                        Pages you have already fetched (summarized)                         │
+│                                                                                            │
+│ Total pages fetched: 1                                                                     │
+│                                                                                            │
+│        Data fetched from: https://en.wikipedia.org/wiki/List_of_capitals_of_France         │
+│                                                                                            │
+│ ▌ The web page provides a chronological list of historical capitals of France. Key         │
+│ ▌ points include: Paris as the capital since 1944, with previous capitals like Tournai     │
+│ ▌ (before 486), Soissons (486–936), Laon (936–987), and Paris (987–1419). Other notable    │
+│ ▌ capitals include Orléans (1108), Troyes (1419–1422), Bourges (1422–1444), Tours          │
+│ ▌ (1444–1527), and Versailles (1682–1789). The page also details provisional capitals      │
+│ ▌ during crises, such as Bordeaux (1914), Tours (1940), Vichy (1940–1944), and             │
+│ ▌ Brazzaville (1940–1943). The information is sourced from Wikipedia's entry on the        │
+│ ▌ topic.                                                                                   │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+⠹ Thinking... 0:00:08
+╭─ Thinking ─────────────────────────────────────────────────────────────────────────────────╮
+│ Okay, let's tackle this query. The user is asking for some historical capitals of France.  │
+│ The research notebook has a page from Wikipedia that lists them chronologically. The key   │
+│ points from the fetched data include Paris since 1944, but before that, there were others  │
+│ like Tournai, Soissons, Laon, and so on. The user wants a clear, accurate, and concise     │
+│ answer, so I need to list the main ones without getting too bogged down in every single    │
+│ entry.                                                                                     │
+│                                                                                            │
+│ First, I'll start with the most well-known capitals. Paris is the current one, but         │
+│ historically, it's been a capital for a long time. Then there's Versailles, which was the  │
+│ capital from 1682 to 1789. That's a significant period. Then there are the ones during     │
+│ crises, like Vichy during WWII. But the user asked for historical capitals, so maybe       │
+│ include those as well.                                                                     │
+│                                                                                            │
+│ Wait, the fetched data mentions provisional capitals during crises, like Bordeaux, Tours,  │
+│ Vichy, and Brazzaville. Should I include those? The user didn't specify if they want only  │
+│ official capitals or also provisional ones. The original question is pretty general, so    │
+│ maybe it's safe to include them as part of the historical capitals.                        │
+│                                                                                            │
+│ I need to structure the answer in a way that's easy to follow. Maybe list them in          │
+│ chronological order. The Wikipedia page has a list starting from Tournai (before 486) up   │
+│ to the modern times. But the user might not need every single one. Let me pick the major   │
+│ ones.                                                                                      │
+│                                                                                            │
+│ So, the main ones would be: Tournai, Soissons, Laon, Paris (until 1419), Orléans, Troyes,  │
+│ Bourges, Tours, Versailles, and then the provisional ones like Bordeaux, Tours, Vichy, and │
+│ Brazzaville. But I should check the data again. The fetched data mentions Paris as the     │
+│ capital since 1944, with previous ones up to 1419. Then later capitals like Orléans        │
+│ (1108), Troyes (1419-1422), Bourges (1422-1444), Tours (1444-1527), Versailles             │
+│ (1682-1789). Then the provisional ones during crises.                                      │
+│                                                                                            │
+│ So the answer should mention the main capitals in order. Also, note that Paris has been    │
+│ the capital for a long time, but there were others before and during different periods.    │
+│ The provisional capitals during wars are also part of the history.                         │
+│                                                                                            │
+│ I need to cite the source, which is the Wikipedia page. The URL is                         │
+│ https://en.wikipedia.org/wiki/List_of_capitals_of_France.                                  │
+│                                                                                            │
+│ I should make sure not to include any information not in the notebook. The user wants the  │
+│ answer based on the research notebook, so I can't add anything else. Also, if there's      │
+│ uncertainty, I should say so, but in this case, the data is clear.                         │
+│                                                                                            │
+│ So the answer would start by stating that France had several capitals throughout history,  │
+│ listing the main ones from the data, and then mention the provisional ones. Then cite the  │
+│ source. Keep it concise but cover the key points.                                          │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯
+France has had several historical capitals throughout its history, with Paris serving as the  
+capital since 1944. Prior to that, notable capitals include:                                  
+
+ • Tournai (before 486)                                                                       
+ • Soissons (486–936)                                                                         
+ • Laon (936–987)                                                                             
+ • Paris (987–1419)                                                                           
+ • Orléans (1108)                                                                             
+ • Troyes (1419–1422)                                                                         
+ • Bourges (1422–1444)                                                                        
+ • Tours (1444–1527)                                                                          
+ • Versailles (1682–1789)                                                                     
+
+During periods of crisis, provisional capitals were also used, such as Bordeaux (1914), Tours 
+(1940), Vichy (1940–1944), and Brazzaville (1940–1943). These capitals reflect the political  
+and historical shifts in France's governance.                                                 
+
+The information is sourced from the Wikipedia page on the topic.                              
+
+                                             URLs                                             
+
+ • https://en.wikipedia.org/wiki/List_of_capitals_of_France    

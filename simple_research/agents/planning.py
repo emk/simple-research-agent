@@ -55,10 +55,15 @@ and delegating it to the "Search" agent. The search agent will return a list of
 URLs that might be relevant to the user's question. You can then ask the "Fetch"
 agent to fetch any URL that seems relevant, and it will summarize the content of
 the page for you. If you need more information, you can ask "Fetch" or "Search"
-to help you find more.
+to help you find more. Some key points:
 
-Once you have collected (and confimed!) enough information to confidently answer
-the question, you can delegate to the Output agent to summarize your findings.
+- You should always fetch at least 1 URL.
+- You should fetch at least 2 or 3 URLs if the question involves subjective
+  judgment or complex information.
+- Do not repeat a search query that you have already run!
+
+Once you have fetched (and confimed!) enough URLs, you can delegate to the Output
+agent to summarize your findings.
 
 The user has asked the following question:
 

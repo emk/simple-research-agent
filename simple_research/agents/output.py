@@ -23,6 +23,9 @@ class OutputAgent(Agent):
     ) -> Optional[AgentType]:
         """Run the output agent."""
 
+        # Clear any unfetched search results.
+        memory.search_results = []
+
         # Let's hope we don't make it here without data.
         if not memory.contains_data():
             raise Exception("No data to output.")

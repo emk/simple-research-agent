@@ -10,6 +10,12 @@ A lot of these initial hypotheses are wrong, because Qwen3 30B A3B doesn't actua
 
 Qwen3 is smart enought to _realize_ that it's guessing, and to decide to run a search. Which still impresses me in the first half of 2025.
 
+After it looks up a couple of sources, we should eventually get a report like:
+
+![Factorio city base advantages, with sources](./docs/factorio-city-base-results.webp)
+
+With a bunch of polishing, this could be turned into a semi-reasonable research agent!
+
 ## More examples
 
 Sample research output about the largest cities in Vermont:

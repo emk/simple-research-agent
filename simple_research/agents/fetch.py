@@ -1,3 +1,5 @@
+"""Fetch agent for fetching web pages."""
+
 from __future__ import annotations
 from typing import Optional
 
@@ -54,8 +56,9 @@ Please look at the web page, and decide what content is relevant to the
 user's question or to the coordinator's search query. You can return
 one of three types of results:
 
-- `relevant`: The page contains relevant information. Please summarize it as briefly
-   as you can, but include the key points needed by the research coordinator.
+- `relevant`: The page contains relevant information. Please summarize it for the
+  research coordinator, including key points, important details, and the source
+  of the information.
 - `irrelevant`: The page does not contain relevant information. We can ignore it.
 - `error`: An error occurred while fetching the page. Please summarize the error.
 """

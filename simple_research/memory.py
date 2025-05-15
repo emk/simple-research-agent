@@ -77,7 +77,8 @@ class Memory:
         # Fetch results.
         relevant = [result for result in self.fetch_results if result.is_relevant()]
         if len(relevant) > 0:
-            wtr.write("## Pages you have already fetched (summarized)\n")
+            wtr.write("## Pages you have already fetched (summarized)\n\n")
+            wtr.write(f"Total pages fetched: {len(self.fetch_results)}\n\n")
             for result in relevant:
                 wtr.write(f"{result}\n")
 
@@ -160,6 +161,9 @@ class IrrevelevantInformation(BaseModel):
 
     result_type: Literal["irrelevant"] = "irrelevant"
     """The type of result."""
+
+    summary: str
+    """A summary of why this page was not relevant."""
 
     def __str__(self) -> str:
         """Return a string representation of the irrelevant information."""
