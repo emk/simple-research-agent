@@ -26,6 +26,9 @@ class Memory:
     fetch_results: list[FetchResult]
     """Summaries of fetched documents."""
 
+    final_report: str | None = None
+    """The final report we printed to the user. Used for testing."""
+
     def __init__(self, original_user_question: str) -> None:
         """Initializes the memory with the original question."""
         self.original_user_question = original_user_question
@@ -33,6 +36,7 @@ class Memory:
         self.current_fetch_url = None
         self.search_results = []
         self.fetch_results = []
+        self.final_report = None
 
     def contains_data(self) -> bool:
         """Return True if we have any data in memory."""
@@ -123,10 +127,10 @@ class FetchResult(BaseModel):
         """Return True if the result is relevant."""
         return self.fetch_result.result_type == "relevant"
 
-    def __str_(self) -> str:
+    def __str__(self) -> str:
         """Return a string representation of the fetch result."""
 
-        return f"""### Already fetched page: {self.url}
+        return f"""### Data fetched from: {self.url}
 
 {self.fetch_result}
 
@@ -146,7 +150,7 @@ class RelevantInformation(BaseModel):
 
     def __str__(self) -> str:
         """Return a string representation of the relevant information."""
-        return "> " + re.sub("\n", "> ", self.summary).strip()
+        return "> " + re.sub("\n", "\n> ", self.summary).strip()
 
 
 class IrrevelevantInformation(BaseModel):

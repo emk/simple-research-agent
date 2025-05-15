@@ -54,9 +54,9 @@ class Agent(ABC):
             from .fetch import FetchAgent
 
             return FetchAgent()
-        # elif agent_type == AgentType.OUTPUT:
-        #     from .output import OutputAgent
+        elif agent_type == AgentType.OUTPUT:
+            from .output import OutputAgent
 
-        #     return OutputAgent()
+            return OutputAgent()
         else:
             raise ValueError(f"Unknown agent type: {agent_type}")

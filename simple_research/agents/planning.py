@@ -1,4 +1,8 @@
-"""Planning agent."""
+"""Planning agent.
+
+This agent makes all the decisions about what to do next. It looks at the
+current state of the "research notebook" (the memory), and then hands off
+work to an appropriate agent."""
 
 from __future__ import annotations
 from typing import Literal, Optional
@@ -54,7 +58,7 @@ the page for you. If you need more information, you can ask "Fetch" or "Search"
 to help you find more.
 
 Once you have collected (and confimed!) enough information to confidently answer
-the question, you can delegate to the output agent to summarize your findings.
+the question, you can delegate to the Output agent to summarize your findings.
 
 The user has asked the following question:
 

@@ -2,13 +2,21 @@
 
 **WORK IN PROGRESS:** This repository is an attempt to mimic the various "Deep Research" tools from the big AI labs, but using Qwen 30B A3B. Think of this more as a benchmark and proof-of-concept than an actual useful tool. Hence "Simple Research". And the most useful thing you can probably do with this tool is use it to test out new models to see if they have the potential to be agents.
 
-It's not yet complete enough to do anything useful.
+The current version can run simple searches and assemble reports, but it would benefit from more tweaking.
 
 ![Sample output of agent planning how to answer a question](./docs/thinking_city_blocks.webp)
 
 A lot of these initial hypotheses are wrong, because Qwen3 30B A3B doesn't actually understand Factorio. But that's why we want it to Google stuff, and use _that_ information to answer for the user.
 
 Qwen3 is smart enought to _realize_ that it's guessing, and to decide to run a search. Which still impresses me in the first half of 2025.
+
+## More examples
+
+Sample research output about the largest cities in Vermont:
+
+![Top 5 cities in Vermont, research report](./docs/vermont-top-5.png)
+
+You can find [longer example traces in `examples/`](./examples/).
 
 ## System Requirements
 
@@ -48,8 +56,10 @@ The decision to approach the problem this way is based on messing around with Qw
 
 ## Testing
 
-I'm still figuring out a good strategy for thoroughly testing non-deteministic LLM agents that interact with MCP commands. More coming soon. But this will probably involve:
+I'm still figuring out a good strategy for thoroughly testing non-deteministic LLM agents that interact with MCP commands. Currently, our testing strategy is:
 
-- Stubbing MCP commands to return known output.
-- Passing very clear test data to the LLM.
-- Retrying failed test cases at least once to handle occasional random failures.
+- Stub MCP commands to return known output.
+- Pass very clear test data to the LLM.
+- Retry failed test cases once using a `pytest` plugin.
+
+A more advanced system might run each test 10 times and insist on 9 passes, or something like that. We could also try to force the LLM to be deterministic, but that can allegedly be difficult even if a `seed` parameter is available, due to differences in hardware and library versions. Better to embrace randomness.
