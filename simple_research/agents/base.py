@@ -15,6 +15,9 @@ from ..tools import McpManager
 class AgentType(str, Enum):
     """Types of agents we support."""
 
+    BASELINE = "baseline"
+    """Baseline agent. Answers immediately without searching."""
+
     PLANNING = "planning"
     """Planning agent. Makes all the big decisions."""
 
@@ -42,7 +45,11 @@ class Agent(ABC):
     @staticmethod
     def lookup(agent_type: AgentType) -> Agent:
         """Lookup the agent class for the given agent type."""
-        if agent_type == AgentType.PLANNING:
+        if agent_type == AgentType.BASELINE:
+            from .baseline import BaselineAgent
+
+            return BaselineAgent()
+        elif agent_type == AgentType.PLANNING:
             from .planning import PlanningAgent
 
             return PlanningAgent()

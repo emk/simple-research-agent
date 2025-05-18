@@ -41,6 +41,7 @@ class Client:
                         "content": question,
                     },
                 ],
+                max_completion_tokens=6 * 1024,
             )
         return TextResponse.from_response(completion)
 

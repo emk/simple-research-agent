@@ -15,10 +15,10 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.patch_stdout import patch_stdout
 from rich import print
 
+from .agents.base import AgentType
 from .client import Client
 from .memory import Memory
 from .agents import Agent
-from .agents.planning import PlanningAgent
 from .tools import McpManager
 
 
@@ -52,7 +52,14 @@ async def run():
     # result = await tools.call_tool("calculate", {"expression": "2 + 2"})
     # print("Tool result:", result)
 
-    agent: Agent = PlanningAgent()
+    print("[bold magenta]Recording model baseline knowledge.[/bold magenta]")
+
+    agent: Agent = Agent.lookup(AgentType.BASELINE)
+    await agent.run(client, memory, tools)
+
+    print("[bold magenta]Running real search![/bold magenta]")
+
+    agent = Agent.lookup(AgentType.PLANNING)
     while agent is not None:
         next_agent_type = await agent.run(client, memory, tools)
         if next_agent_type is None:
