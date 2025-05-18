@@ -4,25 +4,45 @@
 
 The current version can run simple searches and assemble reports, but it would benefit from more tweaking.
 
-![Sample output of agent planning how to answer a question](./docs/thinking_city_blocks.webp)
+## Examples
 
-A lot of these initial hypotheses are wrong, because Qwen3 30B A3B doesn't actually understand Factorio. But that's why we want it to Google stuff, and use _that_ information to answer for the user.
+Here are some examples of the simple agent in action.
 
-Qwen3 is smart enought to _realize_ that it's guessing, and to decide to run a search. Which still impresses me in the first half of 2025.
+### Example 1: "City blocks" in a factory game
 
-After it looks up a couple of sources, we should eventually get a report like:
+Factorio is a factory-building video game. It's common enough to have lots of web-search results, but uncommon enough that Qwen3 30B A3B doesn't always know the answer to simple questions. For example, here is Qwen3 trying to explain the advantages of a "city blocks" factory design:
 
-![Factorio city base advantages, with sources](./docs/factorio-city-base-results.webp)
+![Factorio city block baseline knowledge](./docs/factorio-3-baseline.png)
 
-With a bunch of polishing, this could be turned into a semi-reasonable research agent!
+Items (5) and (6) here are arguably  partial hallucinations. City blocks tend to _encourage_ sprawl and wasted space, and I have rarely seen city blocks equipped with "centralized control points." It certainly isn't a common-cited advantage.
 
-## More examples
+But if we run the research agent, it will:
 
-Sample research output about the largest cities in Vermont:
+1. Run web searches.
+2. Pick pages to read.
+3. Classify those pages as irrelevant or relevant, and summarize the relevant ones.
+
+This will produce a "research notebook" similar to this:
+
+![Factorio city block research notebook, with two sources](./docs/factorio-3-final-notebook.png)
+
+And then the research agent will summarize the notebooks:
+
+![Factorio city block final output](./docs/factorio-2-results.webp)
+
+This answer is more concise than the original, but the contents of the answer come from footnoted sources, not merely the model's own guesswork.
+
+With a bunch of polishing, this could probably be turned into a semi-reasonable research agent!
+
+### Example 2: Largest cities in Vermont
+
+Here's some sample research output about the largest cities in Vermont:
 
 ![Top 5 cities in Vermont, research report](./docs/vermont-top-5.png)
 
-You can find [longer example traces in `examples/`](./examples/).
+### More detailed examples
+
+You can find [full example output in `examples/`](./examples/). These examples come from different versions of the agent, so some are better than others.
 
 ## System Requirements
 
@@ -68,4 +88,6 @@ I'm still figuring out a good strategy for thoroughly testing non-deteministic L
 - Pass very clear test data to the LLM.
 - Retry failed test cases once using a `pytest` plugin.
 
-A more advanced system might run each test 10 times and insist on 9 passes, or something like that. We could also try to force the LLM to be deterministic, but that can allegedly be difficult even if a `seed` parameter is available, due to differences in hardware and library versions. Better to embrace randomness.
+A more advanced system might run each test 10 times and insist on 9 passes, or something like that. We could also try to force the LLM to be deterministic, but that can allegedly be difficult even if a `seed` parameter is available, due to differences in hardware and library versions. Better to embrace randomness given the tools we reasonably have available.
+
+So probably what we want is a statistical test that answers the question, "Given that I have N passes and M failures on an easy and uambiguous example, what are the odds that the model makes the desired choice at least 90% of the time?" And you'd want a sequential procedure where you could abort early if the results were what we expected. But checking the overall results after test is tricky, and we'd want to compensate for that.
