@@ -92,6 +92,23 @@ This page appears to have been updated this month!
 """,
             ),
         ),
+        FetchResult(
+            url="https://worldpopulation.com/vermont/cities",
+            fetch_result=RelevantInformation(
+                result_type="relevant",
+                summary="""
+This is a third-party page. It lists the most populous cities in Vermont as:
+
+1. Burlington 44,382
+2. South Burlington 21,543
+3. Colchester town 17,546
+4. Rutland 15,526
+5. Bennington 15,014
+
+This appears to have been updated semi-recently, but not this month.
+""",
+            ),
+        ),
     ]
     tools = McpManager()
 

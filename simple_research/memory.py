@@ -52,6 +52,16 @@ class Memory:
             return self.search_query_history[-1]
         return None
 
+    def add_search_result(self, result: SearchResult) -> None:
+        """Add a search result to memory.
+
+        If we've already seen this result, don't add it again.
+        """
+        if all(result.url != r.url for r in self.search_results) and all(
+            fetched.url != result.url for fetched in self.fetch_results
+        ):
+            self.search_results.append(result)
+
     def remove_search_result(self, url: str) -> None:
         """Remove a search result from memory."""
         self.search_results = [
@@ -69,7 +79,7 @@ class Memory:
 
         # Queries.
         if len(self.search_query_history) > 0:
-            wtr.write("## Search queries you have tried\n")
+            wtr.write("## Search queries your research team has tried\n")
             for query in self.search_query_history:
                 wtr.write(f"- {query}\n")
             wtr.write("\n")
@@ -77,7 +87,7 @@ class Memory:
         # Fetch results.
         relevant = [result for result in self.fetch_results if result.is_relevant()]
         if len(relevant) > 0:
-            wtr.write("## Pages you have already fetched (summarized)\n\n")
+            wtr.write("## Pages your research team already fetched (summarized)\n\n")
             wtr.write(f"Total pages fetched: {len(self.fetch_results)}\n\n")
             for result in relevant:
                 wtr.write(f"{result}\n")
@@ -85,7 +95,7 @@ class Memory:
         # Search results.
         if len(self.search_results) > 0:
             wtr.write(
-                "## Search results you could fetch if you need more information\n"
+                "## Search results your research team could fetch if you need more information\n"
             )
             for result in self.search_results:
                 wtr.write(f"{result}\n")

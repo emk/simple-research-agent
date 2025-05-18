@@ -76,7 +76,7 @@ seem unlikely to be relevant, or which are likely to be videos.
         output.print()
 
         for result in output.response.results:
-            memory.search_results.append(result)
+            memory.add_search_result(result)
 
         # Always return to the planning agent.
         return AgentType.PLANNING
