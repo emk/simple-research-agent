@@ -28,7 +28,7 @@ This will produce a "research notebook" similar to this:
 
 And then the research agent will summarize the notebooks:
 
-![Factorio city block final output](./docs/factorio-2-results.webp)
+![Factorio city block final output](./docs/factorio3-output.png)
 
 This answer is more concise than the original, but the contents of the answer come from footnoted sources, not merely the model's own guesswork.
 
